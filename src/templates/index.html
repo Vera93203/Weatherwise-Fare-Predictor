@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weatherwise Fare Predictor</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: url("{{ url_for('static', filename='background_image.jpg') }}") no-repeat center center fixed; 
+            background-size: cover; 
+            margin: 0; 
+            padding: 0;
+            height: 100vh;  /* Ensure the body takes the full height of the viewport */
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            background-color: rgba(255, 255, 255, 0.9); 
+            box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+            border-radius: 15px;
+        }
+        
+          
+        h1 {
+            font-size: 30px;
+            color: #333;
+            text-align: center;
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ccc, 0 0 20px #ccc, 0 0 25px #bbb, 0 0 30px #bbb, 0 0 35px #aaa;
+           
+        }
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: bold; 
+            color: #333;
+        }
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #007BFF;
+        }
+        button { 
+            width: 100%;
+            padding: 15px; 
+            background-color: #007BFF; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 18px; 
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover { 
+            background-color: #0056b3; 
+        }
+        .result { 
+            margin-top: 30px; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            background-color: #f9f9f9; 
+            font-size: 16px;
+        }
+        .result h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .result p {
+            margin: 0;
+            padding: 5px 0;
+        }
+        .result hr {
+            margin: 15px 0;
+            border: 0;
+            height: 1px;
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weatherwise Fare Predictor</h1>
+        <div class="form-group">
+            <label for="departure_city">Departure City:</label>
+            <select id="departure_city" required>
+                <option value="" disabled selected>Select your departure city</option>
+                <option value="London">London</option>
+                <option value="New York">New York</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="Paris">Paris</option>
+                <option value="Sydney">Sydney</option>
+                <option value="Dubai">Dubai</option>
+                <option value="Toronto">Toronto</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Hong Kong">Hong Kong</option>
+                <option value="Berlin">Berlin</option>
+                <option value="Rome">Rome</option>
+                <option value="Moscow">Moscow</option>
+                <option value="Beijing">Beijing</option>
+                <option value="Bangkok">Bangkok</option>
+                <option value="Buenos Aires">Buenos Aires</option>
+                <option value="Mexico City">Mexico City</option>
+                <option value="São Paulo">São Paulo</option>
+                <option value="Johannesburg">Johannesburg</option>
+                <option value="Istanbul">Istanbul</option>
+                <option value="Seoul">Seoul</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Jakarta">Jakarta</option>
+                <option value="Vienna">Vienna</option>
+                <option value="Zurich">Zurich</option>
+                <option value="Amsterdam">Amsterdam</option>
+                <option value="Brussels">Brussels</option>
+                <option value="Lisbon">Lisbon</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="Stockholm">Stockholm</option>
+                <option value="Copenhagen">Copenhagen</option>
+                <option value="Oslo">Oslo</option>
+                <option value="Helsinki">Helsinki</option>
+                <option value="Warsaw">Warsaw</option>
+                <option value="Prague">Prague</option>
+                <option value="Budapest">Budapest</option>
+                <option value="Athens">Athens</option>
+                <option value="Dublin">Dublin</option>
+                <option value="Edinburgh">Edinburgh</option>
+                <option value="Reykjavik">Reykjavik</option>
+                <option value="Cairo">Cairo</option>
+                <option value="Cape Town">Cape Town</option>
+                <option value="Casablanca">Casablanca</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Nairobi">Nairobi</option>
+                <option value="Accra">Accra</option>
+                <option value="Lima">Lima</option>
+                <option value="Bogota">Bogota</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="arrival_city">Arrival City:</label>
+            <select id="arrival_city" required>
+                <option value="" disabled selected>Select your arrival city</option>
+                <option value="New York">New York</option>
+                <option value="London">London</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="Paris">Paris</option>
+                <option value="Sydney">Sydney</option>
+                <option value="Dubai">Dubai</option>
+                <option value="Toronto">Toronto</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Hong Kong">Hong Kong</option>
+                <option value="Berlin">Berlin</option>
+                <option value="Rome">Rome</option>
+                <option value="Moscow">Moscow</option>
+                <option value="Beijing">Beijing</option>
+                <option value="Bangkok">Bangkok</option>
+                <option value="Buenos Aires">Buenos Aires</option>
+                <option value="Mexico City">Mexico City</option>
+                <option value="São Paulo">São Paulo</option>
+                <option value="Johannesburg">Johannesburg</option>
+                <option value="Istanbul">Istanbul</option>
+                <option value="Seoul">Seoul</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Jakarta">Jakarta</option>
+                <option value="Vienna">Vienna</option>
+                <option value="Zurich">Zurich</option>
+                <option value="Amsterdam">Amsterdam</option>
+                <option value="Brussels">Brussels</option>
+                <option value="Lisbon">Lisbon</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="Stockholm">Stockholm</option>
+                <option value="Copenhagen">Copenhagen</option>
+                <option value="Oslo">Oslo</option>
+                <option value="Helsinki">Helsinki</option>
+                <option value="Warsaw">Warsaw</option>
+                <option value="Prague">Prague</option>
+                <option value="Budapest">Budapest</option>
+                <option value="Athens">Athens</option>
+                <option value="Dublin">Dublin</option>
+                <option value="Edinburgh">Edinburgh</option>
+                <option value="Reykjavik">Reykjavik</option>
+                <option value="Cairo">Cairo</option>
+                <option value="Cape Town">Cape Town</option>
+                <option value="Casablanca">Casablanca</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Nairobi">Nairobi</option>
+                <option value="Accra">Accra</option>
+                <option value="Lima">Lima</option>
+                <option value="Bogota">Bogota</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" required>
+        </div>
+        <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" required>
+        </div>
+        <button onclick="getBestDays()">Find Best Days</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        async function getBestDays() {
+            const departureCity = document.getElementById('departure_city').value;
+            const arrivalCity = document.getElementById('arrival_city').value;
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+
+            if (!departureCity || !arrivalCity || !startDate || !endDate) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            const response = await fetch('http://127.0.0.1:5000/best_days', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    departure_city: departureCity,
+                    arrival_city: arrivalCity,
+                    start_date: startDate,
+                    end_date: endDate
+                })
+            });
+
+            const result = await response.json();
+            let resultHTML = '<h2>Best Travel Days</h2>';
+            result.forEach(day => {
+                resultHTML += `<p><strong>Date:</strong> ${day.date}</p>`;
+                resultHTML += `<p><strong>Temperature:</strong> ${day.temperature} °C</p>`;
+                resultHTML += `<p><strong>Humidity:</strong> ${day.humidity} %</p>`;
+                resultHTML += `<p><strong>Airline:</strong> ${day.airline}</p>`;
+                resultHTML += `<p><strong>Ticket Price:</strong> $${day.price.toFixed(2)}</p>`;
+                resultHTML += '<hr>';
+            });
+            document.getElementById('result').innerHTML = resultHTML;
+        }
+    </script>
+</body>
+</html>
