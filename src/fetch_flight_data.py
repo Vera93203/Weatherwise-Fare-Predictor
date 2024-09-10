@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-# Replace 'your_opensky_network_api_key' with your actual API key (if needed)
+
 BASE_URL = 'https://opensky-network.org/api/states/all'
 
 def fetch_flight_data():
@@ -24,3 +24,6 @@ if __name__ == "__main__":
         print("Flight data saved successfully.")
     else:
         print("Failed to fetch flight data.")
+
+
+    

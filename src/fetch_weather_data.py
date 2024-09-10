@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-# Replace 'your_openweather_api_key' with your actual API key
+
 API_KEY = '9faef2eafc692677b242ef170a9e7491'
 BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?'
 

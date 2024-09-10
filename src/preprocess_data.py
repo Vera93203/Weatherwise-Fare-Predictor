@@ -76,3 +76,15 @@ if not os.path.exists('../data'):
 combined_data.to_csv('../data/combined_flight_weather_data.csv', index=False)
 
 print("Data preprocessing complete. Combined data saved to 'data/combined_flight_weather_data.csv'.")
+
+
+from sklearn.model_selection import train_test_split
+
+# Split data into training and testing sets
+X = combined_data.drop(columns=['price', 'icao24', 'date'])
+y = combined_data['price']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+
+
